@@ -86,24 +86,35 @@ class Tone2Pitch(LyricsInput):
 	Transform Chinese Tone to Pitch
 	"""
 
-	def __init__(self, processObj = None):
+	def __init__(self, processObj = None, transRule = [None, [75, 75], [64, 69], [64, 61], [71, 65], None]):
 		self.__processObj = processObj
+
+		# 字調轉旋律的規則
+		self.__transRule = transRule
 	
 	def process(self, lines):
 		print "InputProcess: Tone2Pitch"
 
 		self.__lines = lines
 
+		
+		# 處理清聲字的問題
+		def findFirst(i, idx):
+			if self.__lines[i][idx - 1]:
+				return self.__lines[i][idx - 1]
+			else:
+				return findFirst(i, idx - 1)
 
-
-		def transform(tone):
-			#pitchList = [0, 4, 2, 1, 3]
-			pitchList = [[None], [75, 75], [64, 69], [64, 61], [71, 65]]
-			#pitchList = [0, 75, 64, 61, 71]
-			return pitchList[tone]
 
 		for i in range(len(self.__lines)):
-			self.__lines[i] = map(transform, self.__lines[i])
+			self.__lines[i] = map(lambda tone: self.__transRule[tone], self.__lines[i])
+
+			if self.__lines[i][0] == None:
+				self.__lines[i][0] == [75, 75]
+
+			# 若是清聲則與之前第一個不是輕聲的聲調一樣的音高走勢	
+			self.__lines[i] = map(lambda (idx, contour): contour or findFirst(i, idx), enumerate(self.__lines[i]))
+
 			self.__lines[i] = self.__flatten(self.__lines[i])
 
 		self.processNext(self.__processObj, self.__lines)
