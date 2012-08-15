@@ -103,6 +103,9 @@ class AlgoDistDTW(AlgoSequence):
 		self.__seqI = seq1
 		self.__seqJ = seq2
 
+		if len(self.__seqI) > len(self.__seqJ):
+			self.__seqI, self__seqJ = self.__seqJ, self__seqI
+
 
 		# 產生 Accumulate Cost Table 和 Local Cost Table
 		self.__tableAccu = zeros([len(self.__seqI), len(self.__seqJ)], float)
