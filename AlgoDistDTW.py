@@ -104,7 +104,7 @@ class AlgoDistDTW(AlgoSequence):
 		self.__seqJ = seq2
 
 		if len(self.__seqI) > len(self.__seqJ):
-			self.__seqI, self__seqJ = self.__seqJ, self__seqI
+			self.__seqI, self.__seqJ = self.__seqJ, self.__seqI
 
 
 		# 產生 Accumulate Cost Table 和 Local Cost Table
@@ -258,6 +258,7 @@ class AlgoDistDTW(AlgoSequence):
 							prevCoor = tuple(map(sum, zip(nowCoor, comePath[i])))
 							pathIdxList.insert(0, prevCoor)
 
+
 						# 計算前一個起始的座標位置
 						prevStartCoor = tuple(map(sum, zip(nowCoor, comePath[0]))) # [0]表示起始點
 
@@ -311,10 +312,8 @@ class AlgoDistDTW(AlgoSequence):
 
 
 if __name__ == "__main__":
-	from DistNote import DistNote
-	from LocalConstraint import StepType1
-	from LocalConstraint import StepType2
-	from LocalConstraint import StepType3
+	from DistPitch import DistPitch
+	from LocalConstraint import *
 
 
 
@@ -333,8 +332,10 @@ if __name__ == "__main__":
 	print "Main: seq1 = %d" % len(seq1)
 	print "Main: seq2 = %d" % len(seq2)
 
-	dtw = AlgoClassicalDTW(DistNote(), StepType3())
+	#dtw = AlgoDistDTW(DistPitch(), StepType3())
+	dtw = AlgoDistDTW(DistPitch(), PitchToneType())
+	
 
-	print "Main: Distance = %.2f" % dtw.similarity(seq1, seq2)
+	print "Main: Distance = %.2f" % dtw.similarity(seq2, seq1)
 	print "Main: Alignment Result = \n %s" % dtw.getAlignmentResult()
 
