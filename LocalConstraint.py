@@ -69,11 +69,11 @@ class StepType3:
 
 class PitchToneType:
 
-	def __init__(self, weightVec = (1, 1, 1, 1, 1)):
+	def __init__(self, weightVec = (1, 1.5, 2)):
 		if len(weightVec) != 5:
-			raise "StepType3: Weight Vector Length should be 3 !!"
+			raise "PitchToneType: Weight Vector Length should be 3 !!"
 		else:
-			print "StepType3 : Step Type 3 Setup"
+			print "PitchToneType : Pitch Tone Type Setup"
 
 			# 設定 Local Weight Vector，Weight 數值的順序要與 Step Path 的順序相同
 			self.weightVec = weightVec
@@ -86,6 +86,5 @@ class PitchToneType:
 			# 	第三層是表示一個 Step 相對於原點的座標位置，每個 Step 的順序是從最遠到最接近原點，每個座標用 tuple 表示
 			self.stepPattern = [[(-1, -1)], 
 						[(-1, -2), (0, -1)], 
-						[(-2, -1), (-1, 0)],
 						[(-1, -3), (0, -2), (0, -1)],
-						[(-3, -1), (-2, 0), (-1, 0)]]
+
