@@ -1,0 +1,5 @@
+#python pyc file
+*.pyc
+
+#something backup file
+*.bak

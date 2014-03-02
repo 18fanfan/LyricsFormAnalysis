@@ -428,8 +428,8 @@ if __name__ == "__main__":
 	#orilines = FromFile().process(dirPath + 'case1新不了情.txt'.decode('utf-8'))
 
 
-	seq1 = "Vt,ASP,N,C,N,POST,T,N".split(",")
-	seq2 = "Vt,Vt,N,C,N,T,N".split(",")
+	seq1 = "N,Vt,,Vt,POST".split(",")
+	seq2 = "N,Vt,POST".split(",")
 
 	simObject = SimPOS()
 	simObject = AlgoStructAlign(simObject, -1)

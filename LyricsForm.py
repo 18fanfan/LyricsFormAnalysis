@@ -203,12 +203,6 @@ class LyricsForm:
 
 			
 
-
-
-
-
-
-
 	def __allBlockFamily(self, M):
 		M = copy.deepcopy(M)
 
@@ -246,7 +240,7 @@ class LyricsForm:
 		"""
 		計算所有的 Parent Block (start line & size) 的 Children
 		"""
-		for size in range(2, len(M) / 2 + 1):
+		for size in range(4, len(M) / 2 + 1):
 			for start in range(0, M.shape[0] - size):
 
 				"""
